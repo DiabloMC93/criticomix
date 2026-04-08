@@ -26,16 +26,18 @@
 <body class="min-h-screen flex items-center justify-center p-4">
 
     <div id="login-container" class="card p-8 max-w-md w-full text-center">
-        <!-- Bandera de España (SVG) -->
+        <!-- Bandera de España (SVG para evitar errores de carga) -->
         <div class="flag-container flex justify-center mb-6">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 500">
                 <rect width="750" height="500" fill="#c60b1e"/>
                 <rect width="750" height="250" y="125" fill="#ffc400"/>
+                <!-- Escudo simplificado -->
+                <rect width="40" height="50" x="180" y="225" fill="#c60b1e" opacity="0.3"/>
             </svg>
         </div>
 
         <h1 class="text-2xl font-bold text-gray-800 mb-2">Acceso Restringido</h1>
-        <p class="text-gray-600 mb-6">Sevilla, España (IP Localizada)</p>
+        <p class="text-gray-600 mb-6 font-medium">Ubicación: Sevilla, España</p>
 
         <div class="space-y-4">
             <div>
@@ -43,7 +45,7 @@
                 <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" placeholder="******">
             </div>
             <button onclick="checkPassword()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                Entrar a la reunión
+                Ver contenido
             </button>
             <p id="error-msg" class="text-red-500 text-sm hidden">Contraseña incorrecta. Inténtalo de nuevo.</p>
         </div>
@@ -56,13 +58,13 @@
             </svg>
         </div>
         <h2 class="text-2xl font-bold text-gray-800 mb-4">Acceso Autorizado</h2>
-        <p class="text-gray-600 mb-8">Haz clic en el botón de abajo para unirte a la sesión de Google Meet.</p>
+        <p class="text-gray-600 mb-8">La validación de IP (Sevilla, España) y contraseña ha sido exitosa.</p>
         
-        <a href="https://meet.google.com/qtp-qbsj-ofh?authuser=0" target="_blank" class="inline-block w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105">
-            Unirse a Google Meet
+        <a href="https://diablomc93.github.io/critico/" target="_blank" class="inline-block w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-lg">
+            Ir al enlace solicitado
         </a>
         
-        <p class="mt-6 text-xs text-gray-400">Ubicación detectada: Sevilla, España</p>
+        <p class="mt-6 text-xs text-gray-400">Sesión iniciada desde: Sevilla, España</p>
     </div>
 
     <script>
@@ -72,6 +74,7 @@
             const loginContainer = document.getElementById('login-container');
             const meetContainer = document.getElementById('meet-container');
 
+            // Contraseña solicitada: 123456
             if (pass === '123456') {
                 loginContainer.classList.add('hidden');
                 meetContainer.classList.remove('hidden');
@@ -81,7 +84,7 @@
             }
         }
 
-        // Permitir entrar con la tecla Enter
+        // Detectar tecla Enter para mayor comodidad
         document.getElementById('password').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 checkPassword();
